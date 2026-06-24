@@ -36,6 +36,13 @@ public class BfhlControllerTest {
     }
 
     @Test
+    public void testHealthEndpointSuccess() throws Exception {
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", is("UP")));
+    }
+
+    @Test
     public void testPostExampleA() throws Exception {
         BfhlRequestDto request = new BfhlRequestDto();
         request.setData(Arrays.asList("a", "1", "334", "4", "R", "$"));
